@@ -1,0 +1,30 @@
+{
+  "name": "aadharaddressupdate",
+  "version": "1.0.0",
+  "description": "Update aadhar address",
+  "main": "server.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/karmanya007/AadharAddressUpdate.git"
+	},
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "production": "NODE_ENV=production nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+	"bugs": {
+		"url": "https://github.com/karmanya007/AadharAddressUpdate/issues"
+	},
+	"homepage": "https://github.com/karmanya007/AadharAddressUpdate#readme"
+}
