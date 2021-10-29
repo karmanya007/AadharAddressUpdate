@@ -6,11 +6,18 @@ var ds = {
   captchaTxnId: "",
   otpTxnId:"",
 };
-const createCaptcha = () => {
-  axios
+const createCaptcha = async () => {
+  await axios
     .post(
-      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",
-      { "Content-Type": "application/json " }
+      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",{
+        langCode: "en",
+        captchaLength: "3",
+        captchaType: "2"
+       },
+      { headers: {
+        'Content-Type': 'application/json'
+        }
+      }
     )
     .then(function (response) {
       console.log(response);
@@ -69,14 +76,18 @@ const uuidv4 = () => {
 
 console.log(uuidv4());
 
+
 const generateOTP = () => {
+
+const generateOTP = async () => {
+
   ds.uid = document.querySelector("#aano").value;
   ds.captcha = document.querySelector("#captcha").value;
   console.log(document.querySelector("#aano").value);
   console.log(10);
   console.log(document.querySelector("#captcha").value);
 
-  axios
+  await axios
     .post(
       "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/generate/aadhaar/otp",
 
@@ -107,7 +118,7 @@ const generateOTP = () => {
     document.querySelector("#otpWrapper").innerHTML="";
     document.querySelector("#otpWrapper").appendChild(otpfieldText);
     document.querySelector("#otpWrapper").appendChild(otpfield);
-
+    }
 };
 
 const checkCaptcha = (captcha) => {};
