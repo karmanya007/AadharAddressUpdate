@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="shortcut icon" type="image/png" href="/img/favicon.png"> -->
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="app.js"></script>
+    <title>Aadhar Address Update</title>
+</head>
+
+<body>
+    <h1>Plz confirm your consent</h1>
+    <div id="div1">
+        <label for="aano">Aadhar No.</label>
+        <input type="text" id="aano" name="aano" /><br /><br />
+       <div class="div" style="display: flex;">
+        <div id="captchaWrapper"> </div>
+        <i class="fas fa-redo-alt" onclick="createCaptcha()"></i>
+       </div>
+       <label for="captcha">Captcha</label>
+       <input type="text" id="captcha" name="captcha" /><br /><br />
+       <div id="otpWrapper"></div>
+       <button onclick="generateOTP()">Check Captcha</button>
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+
+</html>

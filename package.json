@@ -16,7 +16,6 @@
   "express-mongo-sanitize": "^2.1.0",
   "mongoose": "^6.0.12",
   "morgan": "^1.10.0",
-  "nodemon": "^2.0.14",
   "uuid": "^8.3.2",
   "xss-clean": "^0.1.1"
  },
@@ -30,5 +29,8 @@
  "bugs": {
   "url": "https://github.com/karmanya007/AadharAddressUpdate/issues"
  },
- "homepage": "https://github.com/karmanya007/AadharAddressUpdate#readme"
+ "homepage": "https://github.com/karmanya007/AadharAddressUpdate#readme",
+ "devDependencies": {
+  "nodemon": "^2.0.14"
+ }
 }

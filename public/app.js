@@ -82,6 +82,7 @@ const uuidv4 = () => {
 console.log(uuidv4());
 
 const generateOTP = async () => {
+
   ds.uid = document.querySelector("#aano").value;
   ds.captcha = document.querySelector("#captcha").value;
   console.log(document.querySelector("#aano").value);
