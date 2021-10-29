@@ -4,6 +4,7 @@ var ds = {
   uid:"",
   captcha: "",
   captchaTxnId: "",
+  otpTxnId:"",
 };
 const createCaptcha = () => {
   axios
@@ -67,6 +68,7 @@ const uuidv4 = () => {
 };
 
 console.log(uuidv4());
+
 const generateOTP = () => {
   ds.uid = document.querySelector("#aano").value;
   ds.captcha = document.querySelector("#captcha").value;
