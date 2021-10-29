@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <form action="/auth" method="POST" id="form1">
+    <div id="div1">
         <label for="aano">Aadhar No.</label>
         <input type="text" id="aano" name="aano" /><br /><br />
        <div class="div" style="display: flex;">
@@ -23,6 +23,8 @@
        </div>
        <label for="captcha">Captcha</label>
        <input type="text" id="captcha" name="captcha" /><br /><br />
+       <div id="otpWrapper"></div>
+       <button onclick="generateOTP()">Check Captcha</button>
         <input type="submit" value="Submit" />
     </form>
 </body>
