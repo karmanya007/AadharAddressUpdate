@@ -4,6 +4,7 @@ var ds = {
   uid:"",
   captcha: "",
   captchaTxnId: "",
+  otpTxnId:""
 };
 const createCaptcha = async () => {
   await axios
@@ -21,13 +22,16 @@ const createCaptcha = async () => {
     .then(function (response) {
       console.log(response);
       ds.captchaTxnId = response.data.captchaTxnId;
+
       let str = response.data.captchaBase64String;
       let blob = atob(str);
       //console.log(blob);
       const byteNumbers = new Array(blob.length);
+
       for (let i = 0; i < blob.length; i++) {
         byteNumbers[i] = blob.charCodeAt(i);
       }
+
       const byteArray = new Uint8Array(byteNumbers);
       const b64toBlob = (str, contentType = "image/png", sliceSize = 512) => {
         const byteCharacters = atob(str);
@@ -57,6 +61,7 @@ const createCaptcha = async () => {
       const blobUrl = URL.createObjectURL(blob1);
       //console.log(blobUrl);
       //window.location = blobUrl;
+
       document.querySelector("#captchaWrapper").innerHTML = "";
       const captchaImg = document.createElement("img");
       captchaImg.src = blobUrl;
@@ -64,6 +69,7 @@ const createCaptcha = async () => {
       // do whatever you want if console is [object object] then stringify the response
     });
 };
+
 const uuidv4 = () => {
   return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
     (
@@ -74,6 +80,7 @@ const uuidv4 = () => {
 };
 
 console.log(uuidv4());
+
 const generateOTP = async () => {
   ds.uid = document.querySelector("#aano").value;
   ds.captcha = document.querySelector("#captcha").value;
@@ -101,19 +108,45 @@ const generateOTP = async () => {
     .then(
       (response) => {
         console.log(response);
+        ds.otpTxnId = response.data.txnId;
       },
       (error) => {
         console.log(error);
       }
     );
+
     const otpfield =document.createElement('input');
+    otpfield.setAttribute('id', 'otpId');
     const otpfieldText =document.createElement('p');
-   otpfieldText.innerText="Enter OTP";
+
+    otpfieldText.innerText="Enter OTP";
     document.querySelector("#otpWrapper").innerHTML="";
     document.querySelector("#otpWrapper").appendChild(otpfieldText);
     document.querySelector("#otpWrapper").appendChild(otpfield);
-
 };
+
+const getAuth = async () => {
+  try {
+		const res = await axios({
+			method: 'post',
+			url: `https://stage1.uidai.gov.in/onlineekyc/getAuth/`,
+			data: {
+        uid: ds.uid, 
+        txnId: ds.otpTxnId, 
+        otp: document.querySelector("#otpId").value 
+			},
+		});
+
+		if (res.data.status === 'y') {
+			console.log('Authenticated successfully');
+      window.setTimeout(() => {
+				location.assign('/sendConsent');
+			});
+		}
+	} catch (err) {
+		alert(err.response.data.message);
+	}
+}
 
 const checkCaptcha = (captcha) => {};
 createCaptcha();
