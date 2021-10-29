@@ -1,10 +1,17 @@
 //console.log(1010);
 var otp;
-const createCaptcha = () => {
-  axios
+const createCaptcha = async () => {
+  await axios
     .post(
-      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",
-      { "Content-Type": "application/json " }
+      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",{
+        langCode: "en",
+        captchaLength: "3",
+        captchaType: "2"
+       },
+      { headers: {
+        'Content-Type': 'application/json'
+        }
+      }
     )
     .then(function (response) {
      // console.log(response.data.captchaBase64String);
