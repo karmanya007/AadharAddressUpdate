@@ -18,6 +18,8 @@
     <div id="div1">
         <label for="aano">Aadhar No.</label>
         <input type="text" id="aano" name="aano" /><br /><br />
+        <label for="pno">Phone No.</label>
+        <input type="text" id="pno" name="pno" /><br /><br />
         <div class="div" style="display: flex;">
             <div id="captchaWrapper"> </div>
             <i class="fas fa-redo-alt" onclick="createCaptcha()"></i>
@@ -26,7 +28,7 @@
         <input type="text" id="captcha" name="captcha" /><br /><br />
         <div id="otpWrapper"></div>
         <button onclick="generateOTP()">Check Captcha</button>
-        <button onclick="temp()">Submit</button>
+        <button onclick="getAuth()">Submit</button>
         <!-- <input type="submit" value="Submit" /> -->
         </form>
 </body>
