@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/login', authController.login);
 // router.get('/logout', authController.logout);
 
-router.post('/createAccount',userController.createAccountController);
 router.post('/sendSMS/:num',userController.sendLLSMSController);
 
 router.use(authController.restrictTo('admin'));
