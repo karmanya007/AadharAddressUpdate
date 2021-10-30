@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const factory = require('./handleFactory');
-/* exports.createAccountController = (req, res) => {
+exports.createAccountController = (req, res) => {
   console.log(req.body);
  
   User.find({ UID: req.body.uid }, (err, arr) => {
@@ -18,7 +18,7 @@ const factory = require('./handleFactory');
         } else {
           console.log("Data inserted");
         }
-p      });
+    });
     }
     else{
         console.log("user exist");
@@ -28,7 +28,7 @@ p      });
  
   //res.redirect('/sendConsent')
   //console.log("what");
-}; */
+};
 
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
