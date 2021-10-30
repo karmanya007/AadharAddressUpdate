@@ -48,7 +48,7 @@ app.use(compression());
 
 // 3) ROUTES
 app.use('/', viewRouter);
- app.use('/', userRouter);
+ app.use('/users', userRouter);
 
 app.all('*', (req, res, next) => {
     console.log("Route not defined");

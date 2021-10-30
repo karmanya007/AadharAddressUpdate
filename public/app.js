@@ -61,7 +61,7 @@ const createCaptcha = async () => {
 
       const blob1 = b64toBlob(str, "image/png");
       const blobUrl = URL.createObjectURL(blob1);
-      //console.log(blobUrl);
+      console.log(blobUrl);
       //window.location = blobUrl;
 
       document.querySelector("#captchaWrapper").innerHTML = "";
@@ -129,7 +129,7 @@ const generateOTP = async () => {
 
 const temp =()=>
 {
-  axios.post( "/createAccount",
+  axios.post( "/users/createAccount",
   {
   uid: 999915909178,
   number: 99888888,
@@ -165,5 +165,28 @@ const getAuth = async () => {
   }
 };
 
-const checkCaptcha = (captcha) => {};
+
+const sendSMSToLandlord =async()=>
+{
+   const llNo = document.querySelector('#llno').value;
+   console.log(llNo);
+   await axios
+    .post(
+      `/users/sendSMS/${llNo}`,
+
+      {
+        llNo
+      }
+    )
+    .then(
+      (response) => {
+        console.log(response);
+       
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+}
 createCaptcha();
