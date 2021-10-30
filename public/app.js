@@ -1,22 +1,24 @@
 //console.log(1010);
 
 var ds = {
-  uid:"",
+  uid: "",
   captcha: "",
   captchaTxnId: "",
-  otpTxnId:""
+  otpTxnId: "",
 };
 const createCaptcha = async () => {
   await axios
     .post(
-      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",{
+      "https://stage1.uidai.gov.in/unifiedAppAuthService/api/v2/get/captcha",
+      {
         langCode: "en",
         captchaLength: "3",
-        captchaType: "2"
-       },
-      { headers: {
-        'Content-Type': 'application/json'
-        }
+        captchaType: "2",
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     )
     .then(function (response) {
@@ -82,7 +84,6 @@ const uuidv4 = () => {
 console.log(uuidv4());
 
 const generateOTP = async () => {
-
   ds.uid = document.querySelector("#aano").value;
   ds.captcha = document.querySelector("#captcha").value;
   console.log(document.querySelector("#aano").value);
@@ -116,38 +117,53 @@ const generateOTP = async () => {
       }
     );
 
-    const otpfield =document.createElement('input');
-    otpfield.setAttribute('id', 'otpId');
-    const otpfieldText =document.createElement('p');
+  const otpfield = document.createElement("input");
+  otpfield.setAttribute("id", "otpId");
+  const otpfieldText = document.createElement("p");
 
-    otpfieldText.innerText="Enter OTP";
-    document.querySelector("#otpWrapper").innerHTML="";
-    document.querySelector("#otpWrapper").appendChild(otpfieldText);
-    document.querySelector("#otpWrapper").appendChild(otpfield);
+  otpfieldText.innerText = "Enter OTP";
+  document.querySelector("#otpWrapper").innerHTML = "";
+  document.querySelector("#otpWrapper").appendChild(otpfieldText);
+  document.querySelector("#otpWrapper").appendChild(otpfield);
 };
 
+const temp =()=>
+{
+  axios.post( "/createAccount",
+  {
+  uid: 999915909178,
+  number: 99888888,
+  resp: "y",
+}
+
+);
+window.location.replace("/sendConsent");
+}
 const getAuth = async () => {
   try {
-		const res = await axios({
-			method: 'post',
-			url: `https://stage1.uidai.gov.in/onlineekyc/getAuth/`,
-			data: {
-        uid: ds.uid, 
-        txnId: ds.otpTxnId, 
-        otp: document.querySelector("#otpId").value 
-			},
-		});
+    const res = await axios({
+      method: "post",
+      url: `https://stage1.uidai.gov.in/onlineekyc/getAuth/`,
+      data: {
+        uid: ds.uid,
+        txnId: ds.otpTxnId,
+        otp: document.querySelector("#otpId").value,
+      },
+    });
 
-		if (res.data.status === 'y') {
-			console.log('Authenticated successfully');
-      window.setTimeout(() => {
-				location.assign('/sendConsent');
-			});
-		}
-	} catch (err) {
-		alert(err.response.data.message);
-	}
-}
+    if (res.data.status === "y") {
+      console.log("Authenticated successfully");
+     //temp function goes here
+       
+    }
+    else 
+    {
+      console.log("no");
+    }
+  } catch (err) {
+    alert(err.response.data.message);
+  }
+};
 
 const checkCaptcha = (captcha) => {};
 createCaptcha();
