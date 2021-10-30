@@ -2,6 +2,7 @@
 
 var ds = {
   uid: "",
+  pno:"",
   captcha: "",
   captchaTxnId: "",
   otpTxnId: "",
@@ -85,8 +86,10 @@ console.log(uuidv4());
 
 const generateOTP = async () => {
   ds.uid = document.querySelector("#aano").value;
+  ds.pno = document.querySelector("#pno").value;
   ds.captcha = document.querySelector("#captcha").value;
   console.log(document.querySelector("#aano").value);
+  console.log(document.querySelector("#pno").value);
   console.log(10);
   console.log(document.querySelector("#captcha").value);
 
@@ -127,7 +130,7 @@ const generateOTP = async () => {
   document.querySelector("#otpWrapper").appendChild(otpfield);
 };
 
-const temp =()=>
+/* const temp =()=>
 {
   axios.post( "/users/createAccount",
   {
@@ -138,7 +141,7 @@ const temp =()=>
 
 );
 window.location.replace("/sendConsent");
-}
+} */
 const getAuth = async () => {
   try {
     const res = await axios({
@@ -153,7 +156,25 @@ const getAuth = async () => {
 
     if (res.data.status === "y") {
       console.log("Authenticated successfully");
-     //temp function goes here
+
+      try {
+        const res = await axios({
+          method: 'post',
+          url: `/users/login`,
+          data: {
+            UID: ds.uid,
+            phoneNumber: ds.pno,
+            log: `${ds.uid}.log`,
+          },
+        });
+    
+        if (res.data.status === 'success') {
+          alert('Logged in successfully');
+          window.location.replace("/sendConsent");
+        }
+      } catch (err) {
+        alert(err.response.data.message);
+      }
        
     }
     else 
