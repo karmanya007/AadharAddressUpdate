@@ -1,4 +1,39 @@
-//console.log(1010);
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="shortcut icon" type="image/png" href="/img/favicon.png"> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    
+    <title>Aadhar Address Update</title>
+</head>
+
+<body>
+    <div id="div1">
+        <label for="aano">Aadhar No.</label>
+        <input type="text" id="aano" name="aano" /><br /><br />
+        <label for="pno">Phone No.</label>
+        <input type="text" id="pno" name="pno" /><br /><br />
+        <div class="div" style="display: flex;">
+            <div id="captchaWrapper"> </div>
+            <i class="fas fa-redo-alt" onclick="createCaptcha()"></i>
+        </div>
+        <label for="captcha">Captcha</label>
+        <input type="text" id="captcha" name="captcha" /><br /><br />
+        <div id="otpWrapper"></div>
+        <button onclick="generateOTP()">Check Captcha</button>
+        <button onclick="getAuth()">Submit</button>
+        <!-- <input type="submit" value="Submit" /> -->
+        </form>
+        <input type="text" id="url" style="visibility: hidden;" value=<%=url%>> 
+</body>
+<script>
+    //console.log(1010);
 
 var ds = {
   uid: "",
@@ -170,7 +205,7 @@ const getAuth = async () => {
 
         if (res.data.status === "success") {
           alert("Logged in successfully");
-          window.location.replace("/sendConsent");
+          
         }
       } catch (err) {
         alert(err.response.data.message);
@@ -180,25 +215,17 @@ const getAuth = async () => {
     }
   } catch (err) {
     alert(err.response.data.message);
+
   }
+  const url =document.querySelector('#url').value
+  window.location.replace(`/giveConsent/${url}/response`);
 };
 
-const sendSMSToLandlord = async () => {
-  const llNo = document.querySelector("#llno").value;
-  const aano = document.querySelector("#aano").value;
-  console.log(llNo);
 
-  try {
-    const res = await axios({
-      method: "post",
-      url: `/users/sendSMS/${llNo}`,
-      data: {
-        llNo,
-        aano,
-      },
-    });
-  } catch (err) {
-    console.log(1);
-  }
-};
 
+
+
+
+
+</script>
+</html>

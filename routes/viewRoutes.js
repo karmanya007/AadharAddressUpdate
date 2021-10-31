@@ -12,5 +12,6 @@ router.get('/giveConsent',viewsController.giveConsentController);
 router.get('/confirmConsent',viewsController.confirmConsentController);
 router.get('/editAddress',viewsController.editAddressController);
 router.get('/giveConsent/:id',viewsController.giveConsentController);
+router.get('/giveConsent/:id/response',viewsController.giveConsentResponseController);
 
 module.exports = router;

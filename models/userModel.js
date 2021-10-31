@@ -18,6 +18,19 @@ const userSchema = new mongoose.Schema({
 		enum: ['user', 'admin'],
 		default: 'user',
 	},
+    targetId:
+    {
+        type:String,
+        unique:true,
+        default:'0'
+        
+    },
+    status:
+    {
+        type:String,
+        required:true,
+        default:"nil"
+    },
     log:{
         type: String,
         default: 'access.log'
