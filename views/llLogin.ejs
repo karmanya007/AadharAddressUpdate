@@ -1,4 +1,39 @@
-//console.log(1010);
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="shortcut icon" type="image/png" href="/img/favicon.png"> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    
+    <title>Aadhar Address Update</title>
+</head>
+
+<body>
+    <div id="div1">
+        <label for="aano">Aadhar No.</label>
+        <input type="text" id="aano" name="aano" /><br /><br />
+        <label for="pno">Phone No.</label>
+        <input type="text" id="pno" name="pno" /><br /><br />
+        <div class="div" style="display: flex;">
+            <div id="captchaWrapper"> </div>
+            <i class="fas fa-redo-alt" onclick="createCaptcha()"></i>
+        </div>
+        <label for="captcha">Captcha</label>
+        <input type="text" id="captcha" name="captcha" /><br /><br />
+        <div id="otpWrapper"></div>
+        <button onclick="generateOTP()">Check Captcha</button>
+        <button onclick="getAuth()">Submit</button>
+        <!-- <input type="submit" value="Submit" /> -->
+        </form>
+        <input type="text" id="url" style="visibility: hidden;" value=<%=url%>> 
+</body>
+<script>
+    //console.log(1010);
 
 var ds = {
   uid: "",
@@ -6,7 +41,6 @@ var ds = {
   captcha: "",
   captchaTxnId: "",
   otpTxnId: "",
-  zipData: ""
 };
 const createCaptcha = async () => {
   await axios
@@ -131,6 +165,18 @@ const generateOTP = async () => {
   document.querySelector("#otpWrapper").appendChild(otpfield);
 };
 
+/* const temp =()=>
+{
+  axios.post( "/users/createAccount",
+  {
+  uid: 999915909178,
+  number: 99888888,
+  resp: "y",
+}
+
+);
+window.location.replace("/sendConsent");
+} */
 const getAuth = async () => {
   try {
     const res = await axios({
@@ -159,7 +205,7 @@ const getAuth = async () => {
 
         if (res.data.status === "success") {
           alert("Logged in successfully");
-          window.location.replace("/sendConsent");
+          
         }
       } catch (err) {
         alert(err.response.data.message);
@@ -169,71 +215,17 @@ const getAuth = async () => {
     }
   } catch (err) {
     alert(err.response.data.message);
+
   }
+  const url =document.querySelector('#url').value
+  window.location.replace(`/giveConsent/${url}/response`);
 };
 
-const getEkyc = async () => {
-  try {
-    const res = await axios({
-      method: "post",
-      url: `https://stage1.uidai.gov.in/eAadhaarService/api/downloadOfflineEkyc`,
-      data: {
-        uid: ds.uid,
-        txnId: ds.otpTxnId,
-        otp: document.querySelector("#otpId").value,
-        shareCode: "4567",
-      },
-    });
 
-    if (res.data.status === "Success") {
-      console.log("Ekyc request successfully");
-      ds.zipData = res.data.eKycXML;
 
-      try {
-        const res = await axios({
-          method: 'post',
-          url: `/users/login`,
-          data: {
-            UID: ds.uid,
-            phoneNumber: ds.pno,
-            log: `${ds.uid}.log`,
-          },
-        });
-    
-        if (res.data.status === 'success') {
-          alert('Logged in successfully');
-          window.location.replace("/giveConsent");
-        }
-      } catch (err) {
-        alert(err.response.data.message);
-      }
-       
-    }
-    else 
-    {
-      console.log("no");
-    }
-  } catch (err) {
-    alert(err.response.data.message);
-  }
-};
 
-const sendSMSToLandlord = async () => {
-  const llNo = document.querySelector("#llno").value;
-  const aano = document.querySelector("#aano").value;
-  console.log(llNo);
 
-  try {
-    const res = await axios({
-      method: "post",
-      url: `/users/sendSMS/${llNo}`,
-      data: {
-        llNo,
-        aano,
-      },
-    });
-  } catch (err) {
-    console.log(1);
-  }
-};
 
+
+</script>
+</html>

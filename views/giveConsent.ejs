@@ -9,7 +9,7 @@
   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
    
-    <script src="app.js"></script>
+  
     <title>Aadhar Address Update</title>
 </head>
 
@@ -18,13 +18,47 @@
    <div>
     
        <p>Please choose your choice :</p>
-       <input type="radio" id="yes" name="choice" value="yes">
-       <label for="yes">Yes</label><br>
-       <input type="radio" id="no" name="choice" value="no">
-       <label for="css">No</label><br>
-       <button>Send Response
-       </button>
+      
+        <input type="radio" id="yes" name="choice" value="yes">
+        <label for="yes">Yes</label><br>
+        <input type="radio" id="no" name="choice" value="no">
+        <label for="css">No</label><br>
+        <button onclick="sendResponse()">Send Response</button>
+
+      
+       </form>
+       <input type="text" id="url" style="visibility: hidden;" value=<%=url%>> 
    </div>
 </body>
+<script>
+ const url =document.querySelector('#url').value
+ console.log(url);
+ const sendResponse = async()=>
+ {
+     var resp='';
+if(document.querySelector('#yes').checked == true)
+{
+    resp ="yes"
+}
+else if(document.querySelector('#no').checked == true)
+{
+    resp = "no"
+}
+try {
+       const res = await axios({
+            method: "post",
+          url: `/users/postConsent/${url}`,
+          data: {
+            tId:url,
+            resp: resp,
+          },
+        })
+        console.log(res);
+    } catch (error) {
+        console.log(error);
+    }
 
+
+ }
+</script>
 </html>

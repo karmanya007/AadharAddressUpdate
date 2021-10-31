@@ -19,3 +19,12 @@ exports.editAddressController = async (req,res) =>
 {
 	res.status(200).render('editAddress');
 }
+exports.giveConsentController = async (req,res)=>
+{
+	res.status(200).render('llLogin',{url:req.params.id})
+}
+
+exports.giveConsentResponseController = async (req,res)=>
+{
+	res.status(200).render('giveConsent',{url:req.params.id})
+}

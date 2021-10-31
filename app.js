@@ -50,6 +50,15 @@ app.use(compression());
 	next();
 }); */
 
+app.use(
+	express.urlencoded({
+	  extended: true
+	})
+  )
+  
+  app.use(express.json())
+  
+  
 // 3) ROUTES
 app.use('/', viewRouter);
  app.use('/users', userRouter);
