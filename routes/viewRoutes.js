@@ -14,5 +14,9 @@ router.get('/editAddress',authController.protect,viewsController.editAddressCont
 router.get('/confirmConsent', authController.isLoggedIn,viewsController.confirmConsentController);
 router.get('/giveConsent/:id',authController.isLoggedIn,viewsController.giveConsentController);
 router.get('/giveConsent/:id/response',authController.protect,viewsController.giveConsentResponseController);
+router.get('/success',(req,res)=>
+{
+res.render('success')
+})
 
 module.exports = router;

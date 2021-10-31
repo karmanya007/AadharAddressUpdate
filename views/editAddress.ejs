@@ -1,38 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <link rel="shortcut icon" type="image/png" href="/img/favicon.png"> -->
-  
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-   
+
     <script src="app.js"></script>
     <title>Aadhar Address Update</title>
-</head>
+    <style>
+      body {
+        background-color: whitesmoke;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      button {
+        border: black solid 1px;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin: 1rem;
+        width: 6rem;
+      }
+      input {
+        min-width: 5rem;
+        width: 50vw;
+      }
+    </style>
+  </head>
 
-<body>
-   <h1>Edit address</h1>
-   <div>
-    
-     <label for="co"></label>C/O<input type="text" id="co" name="co">  <br> <br> 
-     <label for="house">house</label><input type="text" id="house" name="house">  <br> <br> 
-     <label for="street">street</label><input type="text" id="street" name="street">   <br> <br>
-     <label for="lm">Landmark</label><input type="text" id="lm" name="lm">   <br> <br>
-     <label for="loc">Locality</label><input type="text" id="loc" name="loc">   <br> <br>
-     <label for="vtc">vtc</label><input type="text" id="vtc" name="vtc">   <br> <br>
-     <label for="subdist">subdist</label><input type="text" id="subdist" name="subdist"><br> <br>   
-     <label for="dist">dist</label><input type="text" id="dist" name="dist">   <br> <br>
-     <label for="state">state</label><input type="text" id="state" name="state">   <br> <br>
-     <label for="country">country</label><input type="text" id="country" name="country"> <br> <br>  
-     <label for="pc">pc</label><input type="text" id="pc" name="pc">   <br> <br>
-     <label for="po">po</label><input type="text" id="po" name="po">   <br> <br>
-
+  <body>
+    <h1>Edit address</h1>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+      "
+    >
+      <label for="co"></label>C/O<input type="text" id="co" name="co" /> <br />
+      <br />
+      <label for="house">house</label
+      ><input type="text" id="house" name="house" /> <br />
+      <br />
+      <label for="street">street</label
+      ><input type="text" id="street" name="street" readonly/> <br />
+      <br />
+      <label for="lm">Landmark</label
+      ><input type="text" id="lm" name="lm" readonly /> <br />
+      <br />
+      <label for="loc">Locality</label
+      ><input type="text" id="loc" name="loc" readonly /> <br />
+      <br />
+      <label for="vtc">vtc</label
+      ><input type="text" id="vtc" name="vtc" readonly /> <br />
+      <br />
+      <label for="subdist">subdist</label
+      ><input type="text" id="subdist" name="subdist" readonly /><br />
+      <br />
+      <label for="dist">dist</label><input type="text" id="dist" name="dist" />
+      <br />
+      <br />
+      <label for="state">state</label
+      ><input type="text" id="state" name="state" /> <br />
+      <br />
+      <label for="country">country</label
+      ><input type="text" id="country" name="country" readonly /> <br />
+      <br />
+      <label for="pc">pc</label
+      ><input type="text" id="pc" name="pc" readonly /> <br />
+      <br />
+      <label for="po">po</label
+      ><input type="text" id="po" name="po" readonly /> <br />
+      <br />
     </div>
-    <button>Verify Address</button>
-    <button>Send</button>
-</body>
+    <div>
+    
+      <button onclick="success()">Send</button>
+    </div>
+  </body>
+  <script>
+    const myData = JSON.parse(localStorage["objectToPass"]);
+    //localStorage.removeItem('objectToPass'); // Clear the localStorage
+    console.log(myData);
+    document.querySelector("#co").value = myData.careof;
+    document.querySelector("#house").value = myData.house;
+    document.querySelector("#street").value = myData.street;
+    document.querySelector("#lm").value = myData.landmark;
+    document.querySelector("#loc").value = myData.loc;
+    document.querySelector("#vtc").value = myData.vtc;
+    document.querySelector("#subdist").value = myData.subdist;
+    document.querySelector("#dist").value = myData.dist;
+    document.querySelector("#state").value = myData.state;
+    document.querySelector("#country").value = myData.country;
+    document.querySelector("#pc").value = myData.pc;
+    document.querySelector("#po").value = myData.po;
+   /* const checkAddress = async () => {
+      var url1 = `https://api.opencagedata.com/geocode/v1/json?q=${myData.house}+${myData.street}+${myData.vtc}+${myData.subdist}&key=15aec3914dd14cb29ce79698f2fa52b4`;
+      if (myData.house == "-") {
+        url1 = `https://api.opencagedata.com/geocode/v1/json?q=${myData.street}+${myData.vtc}+${myData.subdist}&key=15aec3914dd14cb29ce79698f2fa52b4`;
+      }
+      if (myData.street == "-" && myData.house == "-") {
+        url1 = `https://api.opencagedata.com/geocode/v1/json?q=${myData.vtc}+${myData.subdist}&key=15aec3914dd14cb29ce79698f2fa52b4`;
+      }
+      if (myData.street == "-" && myData.house != "-") {
+        url1 = `https://api.opencagedata.com/geocode/v1/json?q=${myData.vtc}+${myData.subdist}&key=15aec3914dd14cb29ce79698f2fa52b4`;
+      }
+      try {
+        const data1 = await axios({
+          method: "get",
+          url: url1,
+        });
+        const data2 = await axios({
+          method: "get",
+          url: `https://api.opencagedata.com/geocode/v1/json?q=${
+            document.querySelector("#house").value
+          }+${document.querySelector("#street").value}+${
+            document.querySelector("#vtc").value
+          }+${
+            document.querySelector("#subdist").value
+          }&key=15aec3914dd14cb29ce79698f2fa52b4`,
+        });
 
+        console.log(data1.results.annotations.DMS.lat);
+        console.log(data1.results.annotations.DMS.lat);
+        if (
+          data1.results.annotations.DMS.lat ===
+            data2.results.annotations.DMS.lat &&
+          data1.results.annotations.DMS.lng ===
+            data2.results.annotations.DMS.lng
+        ) {
+          alert("Same Address");
+        } else {
+          alert("Please Enter Valid Address");
+        }
+      } catch (error) {}
+    };*/
+    const success =()=>
+{
+    window.location.replace("/success");
+}  </script>
 </html>

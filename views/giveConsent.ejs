@@ -11,6 +11,26 @@
    
   
     <title>Aadhar Address Update</title>
+    <style>
+        body{
+            width:50%;
+    height: 100%;
+    padding: 0;
+    margin: auto;
+        background-color:ghostwhite;
+    
+                  
+        }
+        p,label{
+            font-size: 20px;
+        }
+        button{
+            border: black solid 1px;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin: 1rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,11 +74,14 @@ try {
           },
         })
         console.log(res);
+        window.location.replace("/success");
     } catch (error) {
         console.log(error);
     }
-
-
+    window.setTimeout(() => {
+				location.assign('/success');
+			});
  }
+ //location.reload(); 
 </script>
 </html>

@@ -232,8 +232,10 @@ const sendSMSToLandlord = async () => {
         aano,
       },
     });
+    window.location.replace(`/users/status/${res}`);
   } catch (err) {
     console.log(1);
   }
+ 
 };
 

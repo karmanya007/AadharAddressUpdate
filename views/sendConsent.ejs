@@ -11,6 +11,23 @@
    
     <script src="app.js"></script>
     <title>Aadhar Address Update</title>
+    <style>
+        h1{
+            font-style: oblique;
+            color: red;
+        }
+        input {
+            border-width: 2px;
+            
+        }
+        label{
+            margin: 1rem;
+        }
+        button
+        {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,8 +35,10 @@
    <div>
     <label for="aano">Confirm your Aadhar Number Number</label>
     <input type="text"  id="aano" name="aano">
+    <br><br>
     <label for="llno">Enter Landlord's Number</label>
        <input type="text"  id="llno" name="llno">
+       <br><br>
        <button onclick="sendSMSToLandlord()">Send</button>
    </div>
 </body>

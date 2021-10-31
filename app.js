@@ -6,7 +6,7 @@ const compression = require('compression');
 const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
 const cookieParser = require('cookie-parser');
-
+const fs = require('fs')
 const AppError = require('./utils/appError');
 const viewRouter = require('./routes/viewRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -24,10 +24,10 @@ app.use(cors());
 
 // Static file serving
 app.use(express.static(path.join(__dirname, 'public')));
-
+const accessLogStream = fs.createWriteStream(path.join(__dirname, './public/log/access.log'), { flags: 'a' })
 // Dev logging
 if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('combined'));
+	app.use(morgan('combined', { stream: accessLogStream }))
 }
 
 // Body parser, reading data from body into req.body

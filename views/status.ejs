@@ -6,11 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-    <title>Document</title>
+    <title>Track Status</title>
 </head>
-
+<style>
+    body{
+        font-size: 20px;
+    }
+    button{
+        border: 2px solid black;
+        background-color:white;
+        border-radius: 5px;
+         margin: 5px;
+         font-size: 1.2rem;
+         cursor: pointer;
+    }
+</style>
 <body>
-    Your Status is <%=status%>
+    <h3>Your Request status is <%=status%></h3>
+    <br>
         <% if(status=="yes" ){%>
             <button onclick="getAddress()">Proceed</button>
             <%}%>
@@ -30,11 +43,14 @@
                 },
             });
             console.log(res.data.data.data[0].Poa[0].ATTR);
-            localStorage.setItem('objectToPass', res.data.data.data[0].Poa[0].ATTR);
+            localStorage.setItem('objectToPass', JSON.stringify(res.data.data.data[0].Poa[0].ATTR));
+            
         } catch (err) {
             console.log(err);
         }
+        window.location.replace("/editAddress");
     }
+
 </script>
 
 </html>
