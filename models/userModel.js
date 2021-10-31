@@ -34,6 +34,13 @@ const userSchema = new mongoose.Schema({
     log:{
         type: String,
         default: 'access.log'
+    },
+    fileName:{
+        type: String,
+        default: "out.zip"
+    },
+    shareCode:{
+        type: String
     }
 });
 

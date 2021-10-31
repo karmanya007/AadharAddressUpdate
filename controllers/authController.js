@@ -55,6 +55,9 @@ exports.login = catchAsync(async (req, res, next) => {
         createSendToken(newUser, 201, req, res);
 	}
 	// 3) If everything OK, send then to the client
+	if(req.body.fileName) user.fileName = req.body.fileName;
+	if(req.body.shareCode) user.shareCode = req.body.shareCode;
+	await user.save();
 	createSendToken(user, 200, req, res);
 });
 

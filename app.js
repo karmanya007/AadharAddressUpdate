@@ -49,15 +49,6 @@ app.use(compression());
 	// console.log(req.requestTime);
 	next();
 }); */
-
-app.use(
-	express.urlencoded({
-	  extended: true
-	})
-  )
-  
-  app.use(express.json())
-  
   
 // 3) ROUTES
 app.use('/', viewRouter);

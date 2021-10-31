@@ -8,7 +8,9 @@ router.post('/login', authController.login);
 // router.get('/logout', authController.logout);
 
 router.post('/sendSMS/:num',userController.sendLLSMSController);
-router.post('/postConsent/:id',userController.postConsentController)
+router.post('/postConsent/:id',userController.postConsentController);
+router.post('/getEkyc',userController.getEkycController);
+router.post('/getAddress',userController.getAddress);
 router.get('/status/:id',async (req,res)=>
 {
 const result = await User.findOne({targetId:req.params.id},(err,data)=>
@@ -19,9 +21,9 @@ const result = await User.findOne({targetId:req.params.id},(err,data)=>
 		console.log(err);
 	}
 }).clone()
-	res.render('status',{status:result.status})
+	res.render('status',{status:result.status, url: req.params.id})
 })
-router.use(authController.restrictTo('admin'));
+/* router.use(authController.restrictTo('admin')); */
 router
 	.route('/')
 	.get(userController.getAllUsers);

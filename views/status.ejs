@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     Your Status is <%=status%>
-    <% if(status == "yes"){%>
-        <button>Proceed</button>
-        <%}%>
-      
+        <% if(status=="yes" ){%>
+            <button onclick="getAddress()">Proceed</button>
+            <%}%>
+                <input type="text" id="url" style="visibility: hidden;" value=<%=url%>>
 </body>
+
+<script>
+    const tId = document.querySelector('#url').value;
+
+    const getAddress = async () => {
+        try {
+            const res = await axios({
+                method: "post",
+                url: `/users/getAddress`,
+                data: {
+                    tId
+                },
+            });
+            console.log(res.data.data.data[0].Poa[0].ATTR);
+            localStorage.setItem('objectToPass', res.data.data.data[0].Poa[0].ATTR);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+</script>
+
 </html>
