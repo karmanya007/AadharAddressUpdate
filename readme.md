@@ -1,7 +1,7 @@
 # Aadhar Address Update
 
 Realtime aadhar address updating service.
-Submission for [UIDAI Hackathon](https://hackathon.uidai.gov.in/)
+Submission for theme 1 in [UIDAI Hackathon](https://hackathon.uidai.gov.in/)
 
 ---
 
