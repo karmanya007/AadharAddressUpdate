@@ -5,7 +5,7 @@ Submission for [UIDAI Hackathon](https://hackathon.uidai.gov.in/)
 
 ---
 
-![homepage](https://en.wikipedia.org/wiki/Aadhaar#/media/File:Aadhaar_Logo.svg)
+![homepage](./public/adhaarLogo.jpg)
 
 ---
 
