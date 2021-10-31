@@ -3,6 +3,11 @@
 Realtime aadhar address updating service.
 Submission for theme 1 in [UIDAI Hackathon](https://hackathon.uidai.gov.in/)
 
+MVC Architecture(Models-Views-Controllers) used.
+Models dictates the way the user data is stored in database.
+Views dictates the visuals of the website.
+Controllers dictates how everything is handeled behind the scenes on the server when certain requests are made.
+
 ---
 
 <p align="center">
@@ -48,3 +53,5 @@ You will need [Nodejs](https://nodejs.org/en/), [MongoDB](https://www.mongodb.co
    ```
 
 4. Visit http://localhost:3000/
+
+### Presentations/Snapshots, and videos to demonstrate the running code can be found in the public directory
