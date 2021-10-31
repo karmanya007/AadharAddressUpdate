@@ -5,7 +5,9 @@ Submission for [UIDAI Hackathon](https://hackathon.uidai.gov.in/)
 
 ---
 
-![homepage](./public/adhaarLogo.jpg)
+<p align="center">
+  <img src="./public/aadharLogo.jpg" alt = "aadhar logo" />
+</p>
 
 ---
 
