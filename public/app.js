@@ -6,6 +6,7 @@ var ds = {
   captcha: "",
   captchaTxnId: "",
   otpTxnId: "",
+  zipData: ""
 };
 const createCaptcha = async () => {
   await axios
@@ -130,18 +131,6 @@ const generateOTP = async () => {
   document.querySelector("#otpWrapper").appendChild(otpfield);
 };
 
-/* const temp =()=>
-{
-  axios.post( "/users/createAccount",
-  {
-  uid: 999915909178,
-  number: 99888888,
-  resp: "y",
-}
-
-);
-window.location.replace("/sendConsent");
-} */
 const getAuth = async () => {
   try {
     const res = await axios({
@@ -171,6 +160,52 @@ const getAuth = async () => {
         if (res.data.status === 'success') {
           alert('Logged in successfully');
           window.location.replace("/sendConsent");
+        }
+      } catch (err) {
+        alert(err.response.data.message);
+      }
+       
+    }
+    else 
+    {
+      console.log("no");
+    }
+  } catch (err) {
+    alert(err.response.data.message);
+  }
+};
+
+const getEkyc = async () => {
+  try {
+    const res = await axios({
+      method: "post",
+      url: `https://stage1.uidai.gov.in/eAadhaarService/api/downloadOfflineEkyc`,
+      data: {
+        uid: ds.uid,
+        txnId: ds.otpTxnId,
+        otp: document.querySelector("#otpId").value,
+        shareCode: "4567",
+      },
+    });
+
+    if (res.data.status === "Success") {
+      console.log("Ekyc request successfully");
+      ds.zipData = res.data.eKycXML;
+
+      try {
+        const res = await axios({
+          method: 'post',
+          url: `/users/login`,
+          data: {
+            UID: ds.uid,
+            phoneNumber: ds.pno,
+            log: `${ds.uid}.log`,
+          },
+        });
+    
+        if (res.data.status === 'success') {
+          alert('Logged in successfully');
+          window.location.replace("/giveConsent");
         }
       } catch (err) {
         alert(err.response.data.message);
